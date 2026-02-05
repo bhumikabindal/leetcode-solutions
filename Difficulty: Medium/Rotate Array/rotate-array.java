@@ -1,26 +1,20 @@
-// User function Template for Java
-
 class Solution {
-    // Function to rotate an array by d elements in counter-clockwise direction.
+    static void rotate(int[] arr,int s,int e){
+        while(s<e){
+            int temp=arr[s];
+            arr[s]=arr[e];
+            arr[e]=temp;
+            s++;
+            e--;
+        }
+    }
     static void rotateArr(int arr[], int d) {
-        // add your code here
-        int  n=arr.length;
+        // code here
+        int n=arr.length;
         d=d%n;
-        
-        reverse(arr,0,d-1);
-        reverse(arr,d,n-1);
-        reverse(arr,0,n-1);
-        
-    }
-    static void reverse(int arr[],int start,int end){
-        while(start<=end){
-        int temp;
-        temp=arr[start];
-        arr[start]=arr[end];
-        arr[end]=temp;
-        start++;
-        end--;
-    }
+        rotate(arr,0,d-1);
+        rotate(arr,d,n-1);
+        rotate(arr,0,n-1);
         
     }
 }

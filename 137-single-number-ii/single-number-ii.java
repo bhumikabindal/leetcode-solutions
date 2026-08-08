@@ -1,20 +1,13 @@
 class Solution {
     public int singleNumber(int[] nums) {
         int n=nums.length;
-        int ans=0;
-        
-        int count;
-        for(int bitIndex=0; bitIndex<=31;bitIndex++){
-       count=0;
-       for(int j=0;j<n;j++){
-        if((nums[j]&(1<<bitIndex))!=0){
-            count++;
+        int ones=0;
+        int twos=0;
+        for(int i=0;i<n;i++){
+            ones=(ones^nums[i])& ~twos;
+            twos=(twos^nums[i])& ~ones;
+
         }
-       }
-       if(count%3==1){
-         ans=ans|(1<<bitIndex);
-       }
-        }
-        return ans;
+        return ones;
     }
 }

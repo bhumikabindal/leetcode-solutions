@@ -1,24 +1,18 @@
 class Solution {
-    public int func(String s,int k){
-        int l=0,r=0,distinct=0,count=0;
-        int[] hash=new int[3];
-        while(r<s.length()){
-            if(hash[s.charAt(r)-'a']==0){
-                distinct++;
-            }
-            hash[s.charAt(r)-'a']++;
-            while(distinct>k){
-                hash[s.charAt(l)-'a']--;
-             if(hash[s.charAt(l)-'a']==0)distinct--;
-                l=l+1;
-            }
-            count=count+(r-l+1);
-r++;        }
-        return count;
-    }
     public int numberOfSubstrings(String s) {
+        int[] lastSeen={-1,-1,-1};
+        
         int n=s.length();
-        // int total=n*(n+1)/2;
-        return func(s,3)-func(s,2);
+        int count=0;
+        for(int i=0;i<n;i++){
+            lastSeen[s.charAt(i)-'a']=i;
+            if(lastSeen[0]!=-1 && lastSeen[1]!=-1 &&  lastSeen[2]!=-1
+            ){
+                int x=Math.min(lastSeen[0],lastSeen[1]);
+                count+=(1+Math.min(x,lastSeen[2]));
+            }
+
+        }
+        return count;
     }
 }
